@@ -222,10 +222,13 @@ function RootLayoutNav({
   }
   return (
     <RootSiblingParent>
-      <Stack initialRouteName={session ? "home" : "login"}>
+      <Stack initialRouteName={session ? "(drawer)" : "login"}>
         <Stack.Screen name="register" options={{ headerShown: false }} />
         <Stack.Screen name="login" options={{ headerShown: false }} />
-        <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="(drawer)"
+          options={{ headerShown: false, title: "Home" }}
+        />
         <Stack.Screen name="project" options={{ headerShown: true }} />
         <Stack.Screen name="quiz" options={{ headerShown: true }} />
         <Stack.Screen name="welcome" options={{ headerShown: true }} />

@@ -63,19 +63,15 @@ const HomeScreen = () => {
   const [quizzes, setquizzes] = useState<QuizType[]>([]);
   const [role, setRole] = useState<string | undefined>(undefined);
   const db = useSQLiteContext();
-
   const bottomSheetRef = useRef<BottomSheetModal | null>(null);
   const { dismiss } = useBottomSheetModal();
-
   const handlePresentModalPress = () => bottomSheetRef.current?.present();
-
   useEffect(() => {
     db.withTransactionAsync(async () => {
       setRefreshing(true);
       await getData();
     });
   }, [db]);
-
   async function getData() {
     const result: QuizType[] = await db.getAllAsync<QuizType>(
       `SELECT * FROM Quizzes;`
@@ -83,7 +79,6 @@ const HomeScreen = () => {
     setRefreshing(false);
     setquizzes(result);
   }
-
   async function HandlePublishChanges() {
     setRefreshing(true);
     try {
@@ -149,14 +144,12 @@ const HomeScreen = () => {
       setRefreshing(false);
     }
   }
-
   useEffect(() => {
     if (session) {
       const parsedSession = JSON.parse(session);
       setRole(parsedSession.role);
     }
   }, [session]);
-
   return (
     <SafeAreaView
       style={{
@@ -167,7 +160,6 @@ const HomeScreen = () => {
     >
       <StatusBar backgroundColor={COLORS.white} barStyle={"dark-content"} />
       {/* <Spinner visible={refreshing} /> */}
-
       {role === "admin" && quizzes.length > 0 && (
         <View
           style={{
@@ -194,7 +186,6 @@ const HomeScreen = () => {
           </TouchableOpacity>
         </View>
       )}
-
       {quizzes.length > 0 ? (
         <FlatList
           data={quizzes}
@@ -335,7 +326,6 @@ const HomeScreen = () => {
           </AutoSizeText>
         </View>
       )}
-
       {/* Button */}
       {role === "admin" && (
         <View
@@ -357,7 +347,6 @@ const HomeScreen = () => {
           </TouchableOpacity>
         </View>
       )}
-
       <View>
         <CustomBottomSheetModal
           ref={bottomSheetRef}

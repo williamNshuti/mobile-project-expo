@@ -12,6 +12,7 @@ import {
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
+import * as SecureStore from "expo-secure-store";
 import React, { useEffect, useMemo } from "react";
 import { Drawer } from "expo-router/drawer";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
@@ -50,14 +51,16 @@ const CustomDrawerContent = (props: any) => {
       <View>
         {parsedSession && (
           <View style={styles.userInfoWrapper}>
-            <Image
+            {/* <Image
               source={{ uri: parsedSession?.picture }}
               style={styles.image}
-            />
+            /> */}
+
+            <FontAwesome6 name="face-grin-wink" size={30} color="#000" />
 
             <View style={styles.userDetailsWrapper}>
               <Text style={[styles.userName, { color: textColor }]}>
-                {parsedSession?.name}
+                {parsedSession?.name || "William NSHUTI"}
               </Text>
               <Text style={[styles.userEmail, { color: textColor }]}>
                 {parsedSession?.email}
@@ -79,115 +82,12 @@ const CustomDrawerContent = (props: any) => {
             router.push("/");
           }}
         />
-        <DrawerItem
-          icon={({ color, size }) => (
-            <FontAwesome
-              name="calculator"
-              size={25}
-              color={pathname == "/calculator" ? "#fff" : "#000"}
-            />
-          )}
-          label={"Calculator"}
-          labelStyle={[
-            styles.navItemLabel,
-            { color: pathname == "/calculator" ? "#fff" : "#000" },
-          ]}
-          style={{
-            backgroundColor: pathname == "/calculator" ? "#333" : "#fff",
-          }}
-          onPress={() => {
-            router.push("/calculator");
-          }}
-        />
-        <DrawerItem
-          icon={({ color, size }) => (
-            <FontAwesome6
-              name="face-grin-wink"
-              size={28}
-              color={pathname == "/aboutUs" ? "#fff" : "#000"}
-            />
-          )}
-          label={"About Me"}
-          labelStyle={[
-            styles.navItemLabel,
-            { color: pathname == "/aboutUs" ? "#fff" : "#000" },
-          ]}
-          style={{
-            backgroundColor: pathname == "/aboutUs" ? "#333" : "#fff",
-          }}
-          onPress={() => {
-            router.push("/aboutUs");
-          }}
-        />
-
-        <DrawerItem
-          icon={({ color, size }) => (
-            <AntDesign
-              name="contacts"
-              size={28}
-              color={pathname == "/contacts" ? "#fff" : "#000"}
-            />
-          )}
-          label={"Contacts"}
-          labelStyle={[
-            styles.navItemLabel,
-            { color: pathname == "/contacts" ? "#fff" : "#000" },
-          ]}
-          style={{
-            backgroundColor: pathname == "/contacts" ? "#333" : "#fff",
-          }}
-          onPress={() => {
-            router.push("/contacts");
-          }}
-        />
-        <DrawerItem
-          icon={({ color, size }) => (
-            <Entypo
-              name="images"
-              size={28}
-              color={pathname == "/gallery" ? "#fff" : "#000"}
-            />
-          )}
-          label={"Gallery"}
-          labelStyle={[
-            styles.navItemLabel,
-            { color: pathname == "/gallery" ? "#fff" : "#000" },
-          ]}
-          style={{
-            backgroundColor: pathname == "/gallery" ? "#333" : "#fff",
-          }}
-          onPress={() => {
-            router.push("/gallery");
-          }}
-        />
-
-        <DrawerItem
-          icon={({ color, size }) => (
-            <Entypo
-              name="camera"
-              size={28}
-              color={pathname == "/camera" ? "#fff" : "#000"}
-            />
-          )}
-          label={"Camera"}
-          labelStyle={[
-            styles.navItemLabel,
-            { color: pathname == "/camera" ? "#fff" : "#000" },
-          ]}
-          style={{
-            backgroundColor: pathname == "/camera" ? "#333" : "#fff",
-          }}
-          onPress={() => {
-            router.push("/camera");
-          }}
-        />
       </View>
       <View className="mb-6">
         <LogoutButton
           onPress={() => {
-            // signOut();
-            // router.replace("/welcome");
-            // logOut();
+            signOut();
+            router.replace("/login");
           }}
         />
       </View>
@@ -204,12 +104,12 @@ export default function Layout() {
       <MaterialIcons name="dark-mode" size={25} color="black" />
     );
 
-  if (isLoading) {
-    return <Text>Loading...</Text>;
-  }
-  if (!isLoading && !session) {
-    return <Redirect href="/login" />;
-  }
+  // if (isLoading) {
+  //   return <Text>Loading...</Text>;
+  // }
+  // if (!isLoading && !session) {
+  //   return <Redirect href="/login" />;
+  // }
 
   return (
     <ThemeProvider value={theme === "dark" ? DarkTheme : DefaultTheme}>

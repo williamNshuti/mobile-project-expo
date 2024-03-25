@@ -15,17 +15,17 @@ function TabBarIcon(props: {
 
 export default function TabLayout() {
   const { session, isLoading, theme } = useSession();
-  if (isLoading) {
-    return <Text>Loading...</Text>;
-  }
+  // if (isLoading) {
+  //   return <Text>Loading...</Text>;
+  // }
 
-  if (!session) {
-    return <Redirect href="/login" />;
-  }
+  // if (!session) {
+  //   return <Redirect href="/login" />;
+  // }
 
-  if (session) {
-    return <Redirect href="/home" />;
-  }
+  // if (session) {
+  //   return <Redirect href="/home" />;
+  // }
 
   return (
     <Tabs
@@ -42,29 +42,11 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="calculator"
+        name="location"
         options={{
-          title: "Calculator",
+          title: "Location",
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="calculator" color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="aboutUs"
-        options={{
-          title: "About Me",
-          tabBarIcon: ({ color }) => (
-            <FontAwesome6 name="face-grin-wink" size={28} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="contacts"
-        options={{
-          title: "Contacts",
-          tabBarIcon: ({ color }) => (
-            <AntDesign name="contacts" size={28} color={color} />
+            <TabBarIcon name="location-arrow" color={color} />
           ),
         }}
       />

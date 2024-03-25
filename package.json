@@ -60,6 +60,7 @@
     "react-native-auto-size-text": "^1.1.1",
     "react-native-gesture-handler": "~2.14.0",
     "react-native-loading-spinner-overlay": "^3.0.1",
+    "react-native-maps": "1.10.0",
     "react-native-onboarding-swiper": "^1.2.0",
     "react-native-paper": "^5.12.3",
     "react-native-reanimated": "~3.6.2",
